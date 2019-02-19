@@ -2,6 +2,7 @@
 
 ## Overview  
 This is a sample project to show how to create a simple PHP project using a docker container with debug capabilities.
+It uses a docker volume to sync the local filesystem contents with the docker container for being able to view changes on browser refresh.
 
 ## Prerequisites
 Docker installed on system with access to filesystem 
@@ -13,17 +14,20 @@ Replace the ip address in *docker-php-ext-xdebug.ini* with your ip address
 ```
 xdebug.remote_host=<your-ip-address-here>
 ``` 
+  
+Changes to the ini file require a stop/start to be reflected.
+Changes to in the */app* directory sync automatically
 
 ## Creating the container
-Build the container
+Run the container with docker-compose
 ```
-docker build -t first-debug .
+docker-compose up -d
 ```
   
-Run the container
+In order to stop the server use:
 ```
-docker run -d -p 80:80 --name first-debug first-debug
-```
+docker-compose stop
+```  
 
 ## VS Code Debug Configuration
 Have the PHP debug extension installed:  
